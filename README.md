@@ -25,6 +25,18 @@ Key files:
 - `start-dhcp-server.sh` - Startup script
 - `server-config/kea-dhcp4.conf` - DHCP server configuration
 
+### 2. DHCPv4 Relay Scenario
+Location: `dhcp4-relay/`
+
+A topology demonstrating DHCPv4 relay functionality with client, relay and server components.
+
+Key files:
+- `dhcp4-relay.clab.yaml` - Topology definition
+- `start-relay.sh` - Relay startup script  
+- `start-server.sh` - Server startup script
+- `relay-kea-dhcp4.conf` - Relay configuration
+- `server-kea-dhcp4.conf` - Server configuration
+
 ## Usage
 
 1. Install ContainerLab: https://containerlab.dev/install/
