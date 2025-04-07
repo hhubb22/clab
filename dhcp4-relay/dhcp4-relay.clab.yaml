@@ -5,12 +5,12 @@ topology:
     # --- 终端设备 ---
     client:
       kind: linux
-      image: hubuhjj/dhcp-client:latest
+      image: quay.io/dobyasa/dhcp-client:latest
 
     # --- DHCP 中继 (使用 ceos) ---
     relay:
       kind: linux
-      image: hubuhjj/dhcp-relay:latest
+      image: quay.io/dobyasa/dhcp-relay:latest
       binds:
         - ./start-relay.sh:/start-relay.sh
       cmd: /start-relay.sh
@@ -18,7 +18,7 @@ topology:
     # --- DHCP 服务器 ---
     server:
       kind: linux
-      image: hubuhjj/kea-dhcp-server:latest # 使用包含 Kea 的镜像
+      image: quay.io/dobyasa/kea-dhcp-server:latest # 使用包含 Kea 的镜像
       binds:
         - ./start-server.sh:/start-server.sh
         - ./server-kea-dhcp4.conf:/etc/kea/kea-dhcp4.conf:ro # 挂载服务器配置

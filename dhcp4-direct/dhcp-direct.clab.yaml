@@ -7,15 +7,15 @@ topology:
 
     dhcp_server:
       kind: linux
-      image: hubuhjj/kea-dhcp-server:latest
+      image: quay.io/dobyasa/kea-dhcp-server:latest
       cmd: /start-dhcp-server.sh
-      binds: 
+      binds:
         - ./server-config/kea-dhcp4.conf:/etc/kea/kea-dhcp4.conf:ro
         - ./start-dhcp-server.sh:/start-dhcp-server.sh
 
     client1:
       kind: linux
-      image: hubuhjj/dhcp-client:latest
+      image: quay.io/dobyasa/dhcp-client:latest
 
   links:
     - endpoints: ["client1:eth1", "switch1:ovsp1"]
