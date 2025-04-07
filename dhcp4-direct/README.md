@@ -12,6 +12,14 @@
 client1 <---> switch1 <---> dhcp_server
 ```
 
+## 先决条件
+
+- 安装Open vSwitch (OVS)
+- 创建OVS网桥: 
+  ```bash
+  sudo ovs-vsctl add-br switch1
+  ```
+
 ## 快速开始
 
 1. 确保已安装ContainerLab

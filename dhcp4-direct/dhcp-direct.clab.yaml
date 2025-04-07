@@ -1,4 +1,4 @@
-name: dhcp4-direct # 可以重命名 lab 以反映内容变化
+name: dhcp4-direct
 
 topology:
   nodes:
