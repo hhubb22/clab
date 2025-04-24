@@ -33,7 +33,8 @@ topology:
       # No FRR config needed for clients
       exec:
         - "ip -6 route del default"
-        - "ip -6 addr add fd00:1c::100/64 dev eth1 && ip -6 route add default via fd00:1c::1"
+        - "ip -6 addr add fd00:1c::100/64 dev eth1"
+        - "ip -6 route add default via fd00:1c::1"
 
     # Client to act as Multicast Receiver
     client-recv:
@@ -42,7 +43,8 @@ topology:
       # No FRR config needed for clients
       exec:
         - "ip -6 route del default"
-        - "ip -6 addr add fd00:3c::200/64 dev eth1 && ip -6 route add default via fd00:3c::3"
+        - "ip -6 addr add fd00:3c::200/64 dev eth1"
+        - "ip -6 route add default via fd00:3c::3"
 
   links:
     # --- Inter-Router Links ---
