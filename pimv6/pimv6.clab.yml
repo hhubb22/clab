@@ -1,0 +1,54 @@
+# Filename: pimv6-testbed.clab.yml
+name: pimv6-testbed
+
+topology:
+  nodes:
+    # --- Routers ---
+    r1:
+      kind: linux
+      image: quay.io/dobyasa/frr-debian:latest # FRR Router image
+      binds:
+        - r1/daemons:/etc/frr/daemons
+        - r1/frr.conf:/etc/frr/frr.conf
+
+    r2:
+      kind: linux
+      image: quay.io/dobyasa/frr-debian:latest # FRR Router image
+      binds:
+        - r2/daemons:/etc/frr/daemons
+        - r2/frr.conf:/etc/frr/frr.conf
+
+    r3:
+      kind: linux
+      image: quay.io/dobyasa/frr-debian:latest # FRR Router image
+      binds:
+        - r3/daemons:/etc/frr/daemons
+        - r3/frr.conf:/etc/frr/frr.conf
+
+    # --- Clients ---
+    # Client to act as Multicast Source
+    client-src:
+      kind: linux
+      image: quay.io/dobyasa/net-debian-client:latest # Standard Linux image for source tools
+      # No FRR config needed for clients
+      exec:
+        - "ip -6 route del default"
+        - "ip -6 addr add fd00:1c::100/64 dev eth1 && ip -6 route add default via fd00:1c::1"
+
+    # Client to act as Multicast Receiver
+    client-recv:
+      kind: linux
+      image: quay.io/dobyasa/net-debian-client:latest # Standard Linux image for receiver tools
+      # No FRR config needed for clients
+      exec:
+        - "ip -6 route del default"
+        - "ip -6 addr add fd00:3c::200/64 dev eth1 && ip -6 route add default via fd00:3c::3"
+
+  links:
+    # --- Inter-Router Links ---
+    - endpoints: ["r1:eth1", "r2:eth1"] # Link between r1 and r2
+    - endpoints: ["r2:eth2", "r3:eth1"] # Link between r2 and r3
+
+    # --- Client Links ---
+    - endpoints: ["r1:eth2", "client-src:eth1"] # Connect source client to r1 (using r1's eth2)
+    - endpoints: ["r3:eth2", "client-recv:eth1"] # Connect receiver client to r3 (using r3's eth2)
