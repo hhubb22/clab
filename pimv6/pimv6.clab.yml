@@ -35,6 +35,7 @@ topology:
         - "ip -6 route del default"
         - "ip -6 addr add fd00:1c::100/64 dev eth1"
         - "ip -6 route add default via fd00:1c::1"
+        - "mcjoin -s -i eth1 ff15::1 -t 10 -d"
 
     # Client to act as Multicast Receiver
     client-recv:
